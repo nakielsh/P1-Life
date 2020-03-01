@@ -66,39 +66,39 @@ plife generate_life(plife previous){
             //Conditions for a cell to stay death OR be born
             if(PREVIOUS_CELL == 0){ 
                 if(x==0 && y==0){ //up-left corner
-                    if(RIGHT+DOWN_RIGHT+DOWN=3) MY_CELL=1; //IDK CZEMU TU JEST PROBLEM
+                    if(RIGHT+DOWN_RIGHT+DOWN==3) MY_CELL=1; 
                     else MY_CELL=0;
                 }
                 if(x==previous->width && y==0){ //up-right corner
-                    if(LEFT+DOWN_LEFT+DOWN=3) MY_CELL=1;
+                    if(LEFT+DOWN_LEFT+DOWN==3) MY_CELL=1;
                     else MY_CELL=0;
                 }
                 if(x==0 && y==previous->height){ //down-left corner
-                    if(RIGHT+UP_RIGTH+UP=3) MY_CELL=1;
+                    if(RIGHT+UP_RIGTH+UP==3) MY_CELL=1;
                     else MY_CELL=0;
                 }
                 if(x==previous->width && y==previous->height){ //down-right corner
-                    if(LEFT+UP_LEFT+UP=3) MY_CELL=1;
+                    if(LEFT+UP_LEFT+UP==3) MY_CELL=1;
                     else MY_CELL=0;
                 }
                 if(x==0 && y!=0 && y!=previous->height){ //left border
-                    if(UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN=3) MY_CELL=1;
+                    if(UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN==3) MY_CELL=1;
                     else MY_CELL=0;
                 }
                 if(x==previous->width && y!=0 && y!=previous->height){ //right border
-                    if(UP+UP_LEFT+LEFT+DOWN_LEFT+DOWN=3) MY_CELL=1;
+                    if(UP+UP_LEFT+LEFT+DOWN_LEFT+DOWN==3) MY_CELL=1;
                     else MY_CELL=0;
                 }
                 if(x!=0 && x!=previous->width && y==0){ //up border
-                     if(LEFT+DOWN_LEFT+DOWN+DOWN_RIGHT+RIGHT=3) MY_CELL=1;
+                     if(LEFT+DOWN_LEFT+DOWN+DOWN_RIGHT+RIGHT==3) MY_CELL=1;
                     else MY_CELL=0;
                 }
                 if(x!=0 && x!=previous->width && y==previous->height){ //down border
-                    if(LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT=3) MY_CELL=1;
+                    if(LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT==3) MY_CELL=1;
                     else MY_CELL=0;
                 }
                 else{ //mid
-                    if(LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN+DOWN_LEFT=3) MY_CELL=1;
+                    if(LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN+DOWN_LEFT==3) MY_CELL=1;
                     else MY_CELL=0;
                 }
             }
