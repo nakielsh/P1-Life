@@ -23,7 +23,7 @@ plife generate_life(plife previous){
     for( int x = 0; x < previous->width; x++){
         for(int y = 0; y < previous->height; y++){
 
-            //conditions for a cell to stay alive OR die
+            //Conditions for a cell to stay alive or die
             if(PREVIOUS_CELL == 1){ 
                 if(x==0 && y==0){ //up-left corner
                     if(RIGHT+DOWN_RIGHT+DOWN>=2 && RIGHT+DOWN_RIGHT+DOWN<=3) MY_CELL=1;
@@ -63,10 +63,10 @@ plife generate_life(plife previous){
                 }
             }
 
-            //conditions for a cell to stay death OR be born
+            //Conditions for a cell to stay death OR be born
             if(PREVIOUS_CELL == 0){ 
                 if(x==0 && y==0){ //up-left corner
-                    if(RIGHT+DOWN_RIGHT+DOWN=3) MY_CELL=1;
+                    if(RIGHT+DOWN_RIGHT+DOWN=3) MY_CELL=1; //IDK CZEMU TU JEST PROBLEM
                     else MY_CELL=0;
                 }
                 if(x==previous->width && y==0){ //up-right corner
