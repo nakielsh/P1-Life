@@ -15,6 +15,29 @@
 #define MY_CELL current->data[x][y]
 #define PREVIOUS_CELL previous->data[x][y]
 
+// Handle problematic coordinates with grace™
+char get_value_at_coord(plife gol, int x, int y, int wrap_edges, int *did_modify_coords) {
+    int _x = x, _y = y;
+
+    *did_modify_coords = 0;
+
+    if (wrap_edges) {
+        if (_x < 0) _x += gol->width;
+        else if (_x >= gol->width) _x -= gol->width;
+        if (_y < 0) _y += gol->height;
+        else if (_y >= gol->height) _y -= gol->height;
+    } else {
+        if (_x < 0) _x = 0;
+        else if (_x >= gol->width) _x = gol->width - 1;
+        if (_y < 0) _y = 0;
+        else if (_y >= gol->height) _y = gol->height - 1;
+    }
+
+    if (x != _x || y != _y) *did_modify_coords = 1;
+
+    return gol->data[_x][_y];
+}
+
 
 plife generate_life(plife previous){
 
