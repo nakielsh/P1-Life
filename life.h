@@ -26,6 +26,7 @@ plife generate_life(plife previous);
 plife load_life(char *file_name);
 int save_life(char *file_name, plife gol);
 
+
 float default_coloring_func(int x, int y, plife gol, plifepng info, int channel);
 plifepng create_life_png_info(unsigned int scale, png_coloring_func f);
 int save_life_png(char *file_name, plife gol, plifepng info);

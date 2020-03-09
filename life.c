@@ -17,7 +17,7 @@
 
 // Handle problematic coordinates with grace™
 char get_value_at_coord(plife gol, int x, int y, int wrap_edges, int *did_modify_coords) {
-    int _x = x, _y = y;
+    int _x = x, _y = y;,
 
     *did_modify_coords = 0;
 

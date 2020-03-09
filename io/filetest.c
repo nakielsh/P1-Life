@@ -35,7 +35,7 @@ int main() {
 
     for (int x = 0; x < gol->width; x++) {
         for (int y = 0; y < gol->height; y++) {
-            gol->data[x][y] = (x + y) % 2;
+            gol->data[x][y] = rand() % 2;
         }
     }
 
