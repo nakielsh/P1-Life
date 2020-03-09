@@ -72,7 +72,7 @@ void convert_from_char_table(plife gol, char *ct) {
     if ((gol->width * gol->height) % 8 != 0) ct_count++;
 
     for (int i = 0; i < ct_count; i++) {
-        item = ct[ct_count];
+        item = ct[i];
 
         for (int j = 0; j < 8; j++) {
             int x = IDX_TO_X(8 * i + j, gol->width);
@@ -123,8 +123,6 @@ plife load_life(char *file_name) {
         fread(&rle_chain_length, sizeof(char), 1, f);
         fread(&rle_chain_body, sizeof(char), 1, f);
 
-        printf("%d, %d\n", rle_chain_length, rle_chain_body);
-
         for (int i = 0; i < rle_chain_length; i++) {
             ct[ct_pos] = rle_chain_body;
             ct_pos++;
@@ -164,8 +162,6 @@ int save_life(char *file_name, plife gol) {
             fwrite(&rle_chain_length, sizeof(char), 1, f);
             fwrite(&rle_chain_body, sizeof(char), 1, f);
 
-            printf("%d, %d\n", rle_chain_length, rle_chain_body);
-
             rle_chain_length = 0;
         }
 
@@ -180,11 +176,7 @@ int save_life(char *file_name, plife gol) {
     if (rle_chain_length) {
         fwrite(&rle_chain_length, sizeof(char), 1, f);
         fwrite(&rle_chain_body, sizeof(char), 1, f);
-
-        printf("%d, %d\n", rle_chain_length, rle_chain_body);
     }
-
-    printf("\n");
 
     free(ct);
 
