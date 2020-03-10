@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
 #include "life.h"
 
@@ -17,7 +14,7 @@
 
 // Handle problematic coordinates with grace™
 char get_value_at_coord(plife gol, int x, int y, int wrap_edges, int *did_modify_coords) {
-    int _x = x, _y = y;,
+    int _x = x, _y = y;
 
     *did_modify_coords = 0;
 
@@ -38,101 +35,72 @@ char get_value_at_coord(plife gol, int x, int y, int wrap_edges, int *did_modify
     return gol->data[_x][_y];
 }
 
+int count_friends(plife gol, int x, int y) {
+    int friends = 0;
 
-plife generate_life(plife previous){
+    for (int _x = -1; _x < 2; _x++) {
+        for (int _y = -1; _y < 2; _y++) {
+            if (!_x && !_y) continue;
 
-    plife current;
+            int new_x = x + _x, new_y = y + _y;
+            int did_modify_coords = 0;
 
-    for( int x = 0; x < previous->width; x++){
-        for(int y = 0; y < previous->height; y++){
-
-            //Conditions for a cell to stay alive or die
-            if(PREVIOUS_CELL == 1){ 
-                if(x==0 && y==0){ //up-left corner
-                    if(RIGHT+DOWN_RIGHT+DOWN>=2 && RIGHT+DOWN_RIGHT+DOWN<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==previous->width && y==0){ //up-right corner
-                    if(LEFT+DOWN_LEFT+DOWN>=2 && LEFT+DOWN_LEFT+DOWN<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==0 && y==previous->height){ //down-left corner
-                    if(RIGHT+UP_RIGTH+UP>=2 && RIGHT+UP_RIGTH+UP<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==previous->width && y==previous->height){ //down-right corner
-                    if(LEFT+UP_LEFT+UP>=2 && LEFT+UP_LEFT+UP<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==0 && y!=0 && y!=previous->height){ //left border
-                    if(UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN>=2 && UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==previous->width && y!=0 && y!=previous->height){ //right border
-                    if(UP+UP_LEFT+LEFT+DOWN_LEFT+DOWN>=2 && UP+UP_LEFT+LEFT+DOWN_LEFT+DOWN<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x!=0 && x!=previous->width && y==0){ //up border
-                     if(LEFT+DOWN_LEFT+DOWN+DOWN_RIGHT+RIGHT>=2 && LEFT+DOWN_LEFT+DOWN+DOWN_RIGHT+RIGHT<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x!=0 && x!=previous->width && y==previous->height){ //down border
-                    if(LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT>=2 && LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                else{ //mid
-                    if(LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN+DOWN_LEFT>=2 && LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN+DOWN_LEFT<=3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-            }
-
-            //Conditions for a cell to stay death OR be born
-            if(PREVIOUS_CELL == 0){ 
-                if(x==0 && y==0){ //up-left corner
-                    if(RIGHT+DOWN_RIGHT+DOWN==3) MY_CELL=1; 
-                    else MY_CELL=0;
-                }
-                if(x==previous->width && y==0){ //up-right corner
-                    if(LEFT+DOWN_LEFT+DOWN==3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==0 && y==previous->height){ //down-left corner
-                    if(RIGHT+UP_RIGTH+UP==3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==previous->width && y==previous->height){ //down-right corner
-                    if(LEFT+UP_LEFT+UP==3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==0 && y!=0 && y!=previous->height){ //left border
-                    if(UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN==3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x==previous->width && y!=0 && y!=previous->height){ //right border
-                    if(UP+UP_LEFT+LEFT+DOWN_LEFT+DOWN==3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x!=0 && x!=previous->width && y==0){ //up border
-                     if(LEFT+DOWN_LEFT+DOWN+DOWN_RIGHT+RIGHT==3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                if(x!=0 && x!=previous->width && y==previous->height){ //down border
-                    if(LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT==3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
-                else{ //mid
-                    if(LEFT+UP_LEFT+UP+UP_RIGTH+RIGHT+DOWN_RIGHT+DOWN+DOWN_LEFT==3) MY_CELL=1;
-                    else MY_CELL=0;
-                }
+            char value = get_value_at_coord(gol, new_x, new_y, 0, &did_modify_coords);
+            
+            if (!did_modify_coords) {
+                friends += value;
             }
         }
     }
+
+    return friends;
+}
+
+
+plife generate_life(plife previous){
+
+    plife current = create_life(previous->width, previous->height);
+
+    for( int x = 0; x < previous->width; x++){
+        for(int y = 0; y < previous->height; y++){
+            int friends = count_friends(previous, x, y);
+
+            if (
+                PREVIOUS_CELL == 1 &&
+                (friends < 2 || friends > 3)
+            )
+                MY_CELL = 0;
+            else
+                MY_CELL = 1;
+
+            if (
+                PREVIOUS_CELL == 0 && friends == 3
+            )
+                MY_CELL = 1;
+            else
+                MY_CELL = 0;
+
+        }
+    }
+
     return current; 
 }
 
 
 
 int main( int argc, char **argv){
+
+    plife state;
+    int n_gen = 6;
+
+    for (int n = 0; n < n_gen; n++) {
+        plife new_state = generate_life(state);
+
+        // zapis
+
+        free_life(state);
+        state = new_state;
+    }
 
     return 0;
 }
