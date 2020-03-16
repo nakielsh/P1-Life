@@ -95,6 +95,9 @@ plife load_life(char *file_name) {
     unsigned int ccount;
 
     FILE *f = fopen(file_name, "r");
+    if (f == NULL) {
+        return NULL;
+    }
 
     // Check whether the Certified Magic Prefix™ is present
     fread(magic, sizeof(char), 4, f);
