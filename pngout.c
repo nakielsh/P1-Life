@@ -1,5 +1,6 @@
 #include <png.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "life.h"
 
@@ -84,7 +85,40 @@ int save_life_png(char *file_name, plife gol, plifepng info) {
     png_destroy_write_struct(
         &png_data, (png_infopp)NULL
     );
+    free(png_info);
     if (png_row != NULL) free(png_row);
 
     return 0;
+}
+
+float pixel_circles(int x, int y, plife gol, plifepng info, int channel) {
+    float pixel_x = (float)(x % info->scale) / info->scale - 0.5;
+    float pixel_y = (float)(y % info->scale) / info->scale - 0.5;
+    float distance = sqrtf(pixel_x * pixel_x + pixel_y * pixel_y);
+    float small_distance = 1.0 / (float)info->scale;
+
+    float in_circle = 0;
+
+    if (distance < 0.5 - small_distance) {
+        in_circle = 1;
+    } else if (distance < 0.5) {
+        in_circle = 1.0 - (distance - 0.5 + small_distance) / small_distance;
+    }
+
+    in_circle *= gol->data[x / info->scale][y / info->scale];
+
+    return in_circle;
+}
+
+void save_png(char *out_dir, plife state, int n, plifepng png_info) {
+    char *file_name = create_gen_name(out_dir, "pngout", n, "png");
+
+    int err = save_life_png(file_name, state, png_info);
+    if (err) {
+        printf("Couldn't save generation #%d to %s.\n", n, file_name);
+    } else {
+        printf("Saved generation #%d to %s.\n", n, file_name);
+    }
+
+    free(file_name);
 }

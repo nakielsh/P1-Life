@@ -7,29 +7,6 @@
 #define IDX_TO_X(idx, width) ((idx) % width)
 #define IDX_TO_Y(idx, width) ((idx) / width)
 
-plife create_life(unsigned int w, unsigned int h) {
-    plife gol = malloc(sizeof(life));
-    char **board = malloc(w * sizeof(char*));
-
-    for (int x = 0; x < w; x++) {
-        board[x] = malloc(h * sizeof(char));
-    }
-
-    gol->width = w;
-    gol->height = h;
-    gol->data = board;
-
-    return gol;
-}
-
-void free_life(plife gol) {
-    for (int x = 0; x < gol->width; x++) {
-        free(gol->data[x]);
-    }
-    free(gol->data);
-    free(gol);
-}
-
 char *convert_to_char_table(plife gol, unsigned int *out_count) {
     char *ct = NULL;
     unsigned int ct_pos = 0;
@@ -90,7 +67,7 @@ plife load_life(char *file_name) {
     unsigned int w, h;
     char **board;
 
-    char magic[5];
+    char magic[4] = "NOPE";
     char item;
     unsigned int ccount;
 
@@ -136,6 +113,7 @@ plife load_life(char *file_name) {
     convert_from_char_table(gol, ct);
 
     free(ct);
+    fclose(f);
 
     return gol;
 }
