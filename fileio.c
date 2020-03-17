@@ -134,12 +134,16 @@ int save_life(char *file_name, plife gol) {
     // Prep the char table
     unsigned int ct_count = 0;
     char *ct = convert_to_char_table(gol, &ct_count);
+    if (ct == NULL) return 1;
 
     // Do RLE to it
     char rle_chain_length = 0, rle_chain_body = 0;
 
     for (int i = 0; i < ct_count; i++) {
-        if (rle_chain_length && rle_chain_body != ct[i]) {
+        if (
+            (rle_chain_length && rle_chain_body != ct[i]) ||
+            rle_chain_length == 255
+        ) {
             fwrite(&rle_chain_length, sizeof(char), 1, f);
             fwrite(&rle_chain_body, sizeof(char), 1, f);
 
@@ -154,12 +158,12 @@ int save_life(char *file_name, plife gol) {
         }
     }
 
+    free(ct);
+
     if (rle_chain_length) {
         fwrite(&rle_chain_length, sizeof(char), 1, f);
         fwrite(&rle_chain_body, sizeof(char), 1, f);
     }
-
-    free(ct);
 
     fclose(f);
 
