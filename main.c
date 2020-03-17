@@ -10,6 +10,7 @@ int main( int argc, char **argv) {
     char *out_dir = ".";
 
     char *out_file_name = NULL;
+    char *ovk_shader_file_name = NULL;
 
     int wrap_edges = 0;
 
@@ -52,8 +53,10 @@ int main( int argc, char **argv) {
 
             png_info->scale = size;
             i++;
+        } else if (!strcmp(current, "-png-overkill") && i != argc - 1) {
+            ovk_shader_file_name = argv[i + 1];
+            i++;
         }
-       
     }
 
     if (n_gen < 0) {
@@ -75,12 +78,12 @@ int main( int argc, char **argv) {
         return 1;
     }
 
-    save_png(out_dir, state, 0, png_info);
+    save_png(out_dir, state, 0, png_info, ovk_shader_file_name);
 
     for (int n = 0; n < n_gen; n++) {
         plife new_state = generate_life(state, wrap_edges);
 
-        save_png(out_dir, new_state, n + 1, png_info);
+        save_png(out_dir, new_state, n + 1, png_info, ovk_shader_file_name);
 
         free_life(state);
         state = new_state;

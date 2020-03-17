@@ -30,9 +30,9 @@ int save_life(char *file_name, plife gol);
 
 float default_coloring_func(int x, int y, plife gol, plifepng info, int channel);
 plifepng create_life_png_info(unsigned int scale, png_coloring_func f);
-int save_life_png(char *file_name, plife gol, plifepng info);
+int save_life_png(char *file_name, plife gol, plifepng info, char *ovk_shader_file);
 float pixel_circles(int x, int y, plife gol, plifepng info, int channel);
-void save_png(char *out_dir, plife state, int n, plifepng png_info);
+void save_png(char *out_dir, plife state, int n, plifepng png_info, char *ovk_shader_file);
 
 char *create_file_name(char *out_dir, char *file_name);
 char *create_gen_name(char *out_dir, char *file_name, int n, char *ext);
