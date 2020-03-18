@@ -54,8 +54,12 @@ int main( int argc, char **argv) {
             png_info->scale = size;
             i++;
         } else if (!strcmp(current, "-png-overkill") && i != argc - 1) {
+#ifdef BUILD_OVERKILL
             ovk_shader_file_name = argv[i + 1];
             i++;
+#else
+            printf("This build of LIFE does not support Overkill shaders. The ovk file will be ignored.\n");
+#endif
         }
     }
 

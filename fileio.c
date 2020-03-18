@@ -35,7 +35,7 @@ char *convert_to_char_table(plife gol, unsigned int *out_count) {
         }
     }
 
-    if (counter != 8) {
+    if (counter != 8 && ct_pos < ct_count) {
         ct[ct_pos] = current;
     }
 
@@ -120,7 +120,7 @@ plife load_life(char *file_name) {
 
 int save_life(char *file_name, plife gol) {
     FILE *f = fopen(file_name, "w");
-    if (!f) return 1; // Summertime Sadness
+    if (f == NULL) return 1; // Summertime Sadness
 
     char current = 0, counter = 0;
 

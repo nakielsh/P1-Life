@@ -1,6 +1,6 @@
 BUILD_DIR=build/
 OBJ_DIR=$(addprefix $(BUILD_DIR),obj/)
-LIBS=-lm -lpng
+LIBS=-lm -lpng -Loverkill -loverkill
 OUT_NAME=life
 
 O_FILES= main.o fileio.o life.o friends.o generate.o pathutils.o helperr.o pngout.o
@@ -18,4 +18,4 @@ helperr.o: helperr.c
 pngout.o: pngout.c
 
 $(O_FILES):
-	$(CC) -c -o $(addprefix $(OBJ_DIR),$@) $^
+	$(CC) -c -o $(addprefix $(OBJ_DIR),$@) $^ -DBUILD_OVERKILL

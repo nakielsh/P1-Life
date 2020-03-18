@@ -2,7 +2,11 @@
 
 This repository contains our implementation of the first JIMP2 project - John Conway's Game of Life in C.
 
-More info coming soon.
+## Let's start with a pretty animation designed to lure you in
+
+![A Game of Life pulsar](pulsar.gif)
+
+Isn't the above image pretty? The GIF was created using some random website, but the PNGs used to create that GIF came from our **Wonderful Piece of Software**.
 
 ## Progress tracking
 For info about progress, go to [the project board](https://github.com/JIMP-HNKS/P1-Life/projects/1).

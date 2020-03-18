@@ -41,6 +41,7 @@ int save_life_png(char *file_name, plife gol, plifepng info, char *ovk_shader_fi
 
     if (f == NULL) return 1; // like if you cry every time
 
+#ifdef BUILD_OVERKILL
     if (ovk_shader_file != NULL) {
         // Load an Overkill shader
         if (ovk_load_program(ovk_shader_file, &ovk_prog)) {
@@ -52,6 +53,7 @@ int save_life_png(char *file_name, plife gol, plifepng info, char *ovk_shader_fi
             exit(1);
         }
     }
+#endif
 
     // Writing time i guess
     png_data = png_create_write_struct(
@@ -84,6 +86,7 @@ int save_life_png(char *file_name, plife gol, plifepng info, char *ovk_shader_fi
 
     for (int y = 0; y < p_height; y++) {
         for (int x = 0; x < p_width; x++) {
+#ifdef BUILD_OVERKILL
             if (ovk_shader_file != NULL) {
                 // Let Overkill shaders do their thing
                 ovk_reset_context(ovk_ctx);
@@ -101,11 +104,14 @@ int save_life_png(char *file_name, plife gol, plifepng info, char *ovk_shader_fi
                 png_row[x * 3 + 1] = (char)(255.0 * ovk_get_variant(ovk_ctx, OVK_UNI1_V_OUT_PIXEL_GREEN));
                 png_row[x * 3 + 2] = (char)(255.0 * ovk_get_variant(ovk_ctx, OVK_UNI1_V_OUT_PIXEL_BLUE));
             } else {
+#endif
                 // Use the built-in coloring func
                 png_row[x * 3] = (int)(info->coloring_func(x, y, gol, info, 0) * 255);
                 png_row[x * 3 + 1] = (int)(info->coloring_func(x, y, gol, info, 1) * 255);
                 png_row[x * 3 + 2] = (int)(info->coloring_func(x, y, gol, info, 2) * 255);
+#ifdef BUILD_OVERKILL
             }
+#endif
         }
         png_write_row(png_data, png_row);
     }
@@ -123,10 +129,12 @@ int save_life_png(char *file_name, plife gol, plifepng info, char *ovk_shader_fi
     free(png_info);
     if (png_row != NULL) free(png_row);
 
+#ifdef BUILD_OVERKILL
     if (ovk_shader_file != NULL) {
         ovk_free_context(ovk_ctx);
         ovk_free_program(ovk_prog);
     }
+#endif
 
     return 0;
 }
