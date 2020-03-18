@@ -1,7 +1,7 @@
 BUILD_DIR=build/
 OBJ_DIR=$(addprefix $(BUILD_DIR),obj/)
 LIBS=-lm -lpng -Loverkill -loverkill
-OUT_NAME=life
+OUT_NAME=life_ovk
 
 O_FILES= main.o fileio.o life.o friends.o generate.o pathutils.o helperr.o pngout.o
 
