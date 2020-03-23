@@ -1,0 +1,22 @@
+// A night vision-style shader
+
+// Interlace pattern
+pushv global_coords_y
+pushc 100
+mul
+int
+pushc 2
+mod
+pushc 0.3
+mul
+
+// Cells
+pushv cell_state
+pushc 0.6
+mul
+add
+
+// Out!
+setv out_pixel_green
+setv0 out_pixel_red
+setv0 out_pixel_blue

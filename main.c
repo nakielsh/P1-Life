@@ -15,7 +15,7 @@ int main( int argc, char **argv) {
     int wrap_edges = 0;
 
     plifepng png_info = create_life_png_info(
-        32, NULL
+        1, NULL
     );
 
     plife state;
@@ -71,7 +71,7 @@ int main( int argc, char **argv) {
     } else if (in_file == NULL) { 
         // no input file
         print_error("No input file provided.");
-        printf("podaj plik!\n");
+        help();
         return 1;
     }
 
