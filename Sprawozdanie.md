@@ -1,4 +1,4 @@
-### Sprawozdanie z projektu The Game of Life
+# Sprawozdanie z projektu The Game of Life
 
 ## Działanie
 ![Game of Life gliders](images/gliders.gif)
@@ -12,7 +12,7 @@ Projekt podzielony jest na 11 plików:
 1 Makefile: `Makefile`  
 ## 3. Parametry wywołania programu
 
-# Opcje:
+### Opcje:
     -n  LICZBA_GENERACJI
         Ilość generacji gry do wygenerowania
 
@@ -30,7 +30,7 @@ Projekt podzielony jest na 11 plików:
     -wrap (opcjonalne)
         Krawędzie będą się zawijały tworząc tablicę bez granic.
 
-# Opcje PNG:
+### Opcje PNG:
     -png-circles (opcjonalny)
         Tworzy okrągłe komórki w plikach wyjściowych PNG.
 
