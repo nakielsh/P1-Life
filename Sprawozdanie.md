@@ -6,10 +6,10 @@
 ## 1. Opis tematyki projektu
 
 ## 2. Opis struktury projektu
-Projekt podzielony jest na 11 plików:
-8 plików źródłowych: `fileio.c` `friends.c` `generate.c` `helper.c` `life.c` `main.c` `pathutils.c` `pngout.c`
-2 pliki nagłówkowe: `life.h` `overkill.h`
-1 Makefile: `Makefile`
+Projekt podzielony jest na 11 plików:  
+8 plików źródłowych: `fileio.c` `friends.c` `generate.c` `helper.c` `life.c` `main.c` `pathutils.c` `pngout.c`  
+2 pliki nagłówkowe: `life.h` `overkill.h`  
+1 Makefile: `Makefile`  
 ## 3. Parametry wywołania programu
 
 # Opcje:
