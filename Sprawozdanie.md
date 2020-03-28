@@ -39,12 +39,40 @@ Projekt podzielony jest na 11 plików:
         Musi być większy niż 0. Domyślnie ustawione na 1.
 
     -png-overkill PLIK_OVK (opcjonalny)
-
+        
 
 
 ## 4. Szczegóły implementacyjne
 
 ## 5. Testowanie programu i wyniki
+
+Program testowany był przy użyciu konstrukcji gry w życie, których kolejne generacje były znane.
+
+### Struktura plików wynikowych
+
+Program otwiera i zapisuje pliki `.life`. Pliki life zapisywane są w formacie binarnym.
+
+Zawartość plików jest podzielona na 2 części: nagłówek i dane.
+
+Na nagłówek pliku składają się 3 wartości:
+
+|Wartość|Typ danych|
+|-|-|
+|Identyfikator ("LIFE")|`char[4]`|
+|Szerokość tablicy|`unsigned int`|
+|Wysokość tablicy|`unsigned int`|
+
+Dane tablicy są zapisane w formie ciągu par ilość-dane. Aby przekonwertować dane z pliku do danych, należy "rozwinąć" pary w ciąg `char`-ów:
+
+|Dane w pliku|Ciąg `char`-ów|
+|-|-|
+|`03 4A 01 7F 02 51`|`4A 4A 4A 7F 51 51`|
+
+Z każdego z uzyskanych `char`-ów należy "wyłuskać" bity i odwrócić ich kolejność, by uzyskać 8-komórkowe bloki:
+![](images/char_to_block.png)
+
+Bloki należy następnie ułożyć od lewej do prawej (przechodząc do kolejnej linii, gdy komórki przekraczają szerokość tabeli):
+![](images/block_to_table.png)
 
 ## 6. Wnioski i spostrzeżenia
 
