@@ -5,17 +5,17 @@
 
 ## 1. Opis tematyki projektu
 
-Nasz projekt - Gra w życie Johna Conwaya jest to uporządkowany zbiór komórek. Komórki przyjegając do siebie tworzą dwuwymiarową siatkę.  
-Każda komówka zawiera się w jednym z dwóch stanów - żywa lub martwa. Dodatkowo każda komórka posiada 8 sąsiadów, czyli komórki przylegające  
-do niej z każdej strony ( na południu, południowym-zachodzie, zachodzie, północnym-zachodzie, północy, północnym-wschodzie, wschodzie   
+Nasz projekt - Gra w życie Johna Conwaya jest to uporządkowany zbiór komórek. Komórki przyjegając do siebie tworzą dwuwymiarową siatkę.
+Każda komówka zawiera się w jednym z dwóch stanów - żywa lub martwa. Dodatkowo każda komórka posiada 8 sąsiadów, czyli komórki przylegające
+do niej z każdej strony ( na południu, południowym-zachodzie, zachodzie, północnym-zachodzie, północy, północnym-wschodzie, wschodzie 
 i południowym-wschodzie). Liczba sąsiadów oraz obecny stan komórki określają stan tej komórki w następnej generacji.  
 Zasady gry:   
 |Obecny stan|Liczba żywych sąsiadów|Stan w następnej generacji|
 |-|-|-|
 |Martwa|`3`|Żywa|
 |Martwa|`!3`|Martwa|
-|Żywa|`2 || 3`|Żywa|
-|Żywa|`!(2 || 3`)|Martwa|
+|Żywa|2 `||` 3|Żywa|
+|Żywa|!(2 `||` 3)|Martwa|
 
 ## 2. Opis struktury projektu
 Projekt podzielony jest na 11 plików:  
@@ -87,8 +87,8 @@ Bloki należy następnie ułożyć od lewej do prawej (przechodząc do kolejnej 
 ![](images/block_to_table.png)
 
 ## 6. Wnioski i spostrzeżenia
-Projekt był dla nas ciekawy, a praca w zespole przebiegała płynnie. W pracy zdalnej pomocne okazało się  
-rozszerzenie `Live Share` w `Visual Studio Code`, które pomogło w pracy zespołowej zdalnie. Używanie Git'a i GitHub'a jest bardzo proste  
+Projekt był dla nas ciekawy, a praca w zespole przebiegała płynnie. W pracy zdalnej pomocne okazało się 
+rozszerzenie `Live Share` w `Visual Studio Code`, które pomogło w pracy zespołowej zdalnie. Używanie Git'a i GitHub'a jest bardzo proste 
 i zdecydowanie ułatwia pracę nad projektem.
 
 ## Autorzy
