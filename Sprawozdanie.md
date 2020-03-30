@@ -45,6 +45,8 @@ Projekt podzielony jest na 11 plików:
 * **Skrypty shell'a**:
     * `build_all.sh` - wykonanie make dla obu plików Makefile
 
+Powyższy podział był zmotywowany chęcią rozbicia kodu na "funkcjonalne całości", zachowując logiczną strukturę oraz unikając potrzeby "skakania między plikami" w trakcie rozwijania pojedynczego modułu.
+
 ## 3. Parametry wywołania programu
 
 ### Opcje:
@@ -78,6 +80,10 @@ Projekt podzielony jest na 11 plików:
 
 
 ## 4. Szczegóły implementacyjne
+
+Plansza jest przechowywana w pamięci jako dwuwymiarowa tablica komórek typu `char`. W ten sposób kod manipulujący komórkami jest krótki i przejrzysty, kosztem ilości zajmowanej pamięci. Aby uniknąć nadmiernego użycia RAM-u przez program, w pamięci przechowywane są maksymalnie 2 plansze.
+
+Pliki siatek przechowywują komórki w postaci ośmio-komórkowych bloków `char` skompresowanych przy użyciu prostego algorytmu RLE (Run-Length Encoding). Pozwala to na redukcję rozmiarów plików przynajmniej czterokrotnie w porównaniu z komórkami zapisanymi jako pojedyncze znaki '0' lub '1', bez nadmiernej komplikacji kodu ładowania i zapisu plików `.life`.
 
 ## 5. Testowanie programu i wyniki
 
