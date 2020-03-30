@@ -9,8 +9,10 @@ Nasz projekt - Gra w życie Johna Conwaya jest to program generujący kolejne ge
 Komórki przyjegając do siebie tworzą dwuwymiarową siatkę.
 Każda komórka zawiera się w jednym z dwóch stanów - żywa lub martwa. Dodatkowo każda komórka posiada 8 sąsiadów, czyli komórki przylegające
 do niej z każdej strony ( na południu, południowym-zachodzie, zachodzie, północnym-zachodzie, północy, północnym-wschodzie, wschodzie 
-i południowym-wschodzie). Liczba sąsiadów oraz obecny stan komórki określają stan tej komórki w następnej generacji.  
-### Zasady gry:   
+i południowym-wschodzie). Liczba sąsiadów oraz obecny stan komórki określają stan tej komórki w następnej generacji.
+
+### Zasady gry:
+
 |Obecny stan|Liczba żywych sąsiadów|Stan w następnej generacji|
 |-|-|-|
 |Martwa|`3`|Żywa|
@@ -19,10 +21,30 @@ i południowym-wschodzie). Liczba sąsiadów oraz obecny stan komórki określaj
 |Żywa|`!(2 lub 3)`|Martwa|
 
 ## 2. Opis struktury projektu
-Projekt podzielony jest na 11 plików:  
-8 plików źródłowych: `fileio.c` `friends.c` `generate.c` `helper.c` `life.c` `main.c` `pathutils.c` `pngout.c`  
-2 pliki nagłówkowe: `life.h` `overkill.h`  
-1 Makefile: `Makefile`  
+
+Projekt podzielony jest na 11 plików:
+
+* **Pliki źródłowe**:
+    * Główny interfejs:
+        * `main.c` - przyjmowanie argumentów, interakcja z użytkownikiem
+        * `helperr.c` - pomoc, funkcja do wypisywania błędów
+    * Logika gry:
+        * `life.c` - tworzenie i zwalnianie planszy
+        * `friends.c` - liczenie sąsiadów
+        * `generate.c` - tworzenie kolejnych generacji
+    * Zarządzanie plikami:
+        * `fileio.c` - ładowanie i zapis plików `.life`
+        * `pngout.c` - tworzenie plików PNG
+        * `pathutils.c` - tworzenie ścieżek plików wynikowych
+* **Pliki nagłówkowe**:
+    * `life.h` - definicje wszystkich funkcji i typów
+    * `overkill.h` - plik nagłówkowy biblioteki shaderów Overkill
+* **Pliki make**:
+    * `Makefile` - makefile dla programu bez obsługi shaderów
+    * `Makefile_ovk` - jak wyżej tylko z obsługą shaderów
+* **Skrypty shell'a**:
+    * `build_all.sh` - wykonanie make dla obu plików Makefile
+
 ## 3. Parametry wywołania programu
 
 ### Opcje:
